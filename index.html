@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMJ Digital Space - Multimedia Jurnalistik SMK Negeri 1 Singosari</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#080c14',
+                        cardBg: '#0f172a',
+                        cardBorder: '#1e293b',
+                        accentGold: '#f59e0b',
+                        accentAmber: '#d97706',
+                        skyPrimary: '#38bdf8'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS File -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-black">
+
+    <!-- NAVBAR HEADER -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-header border-b border-slate-800/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo & Brand MMJ Stema -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('home')">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-700 flex items-center justify-center shadow-lg shadow-amber-500/20 font-extrabold text-slate-950 text-xl">
+                        <i class="fa-solid fa-camera-retro"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold tracking-tight text-white block leading-none">MMJ <span class="text-amber-400">Digital Space</span></span>
+                        <span class="text-[10px] text-slate-400 tracking-wider uppercase font-semibold">MMJ Stema · SMKN 1 Singosari</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Menu (5 Fitur Utama) -->
+                <nav class="hidden lg:flex items-center space-x-1">
+                    <button onclick="navigateTo('home')" id="nav-home" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-amber-400 bg-amber-500/10 border border-amber-500/20">Beranda</button>
+                    <button onclick="navigateTo('archive')" id="nav-archive" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">Memory Archive</button>
+                    <button onclick="navigateTo('news')" id="nav-news" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">Newsroom</button>
+                    <button onclick="navigateTo('profile')" id="nav-profile" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">Jejak & Profil MMJ</button>
+                    <button onclick="navigateTo('visual')" id="nav-visual" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">Karya Visual</button>
+                    <button onclick="navigateTo('feedback')" id="nav-feedback" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">Kritik & Saran</button>
+                </nav>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="lg:hidden">
+                    <button id="hamburger-btn" onclick="toggleMobileMenu()" class="p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl" id="hamburger-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden border-b border-slate-800 bg-[#080c14]/95 px-4 pt-2 pb-6 space-y-2">
+            <button onclick="navigateTo('home'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800/80 transition-all flex items-center gap-3">
+                <i class="fa-solid fa-house w-5 text-amber-400"></i> Beranda
+            </button>
+            <button onclick="navigateTo('archive'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800/80 transition-all flex items-center gap-3">
+                <i class="fa-solid fa-box-archive w-5 text-amber-400"></i> Memory Archive
+            </button>
+            <button onclick="navigateTo('news'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800/80 transition-all flex items-center gap-3">
+                <i class="fa-solid fa-newspaper w-5 text-amber-400"></i> Newsroom
+            </button>
+            <button onclick="navigateTo('profile'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800/80 transition-all flex items-center gap-3">
+                <i class="fa-solid fa-layer-group w-5 text-amber-400"></i> Jejak & Profil MMJ
+            </button>
+            <button onclick="navigateTo('visual'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800/80 transition-all flex items-center gap-3">
+                <i class="fa-solid fa-photo-film w-5 text-amber-400"></i> Karya Visual
+            </button>
+            <button onclick="navigateTo('feedback'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800/80 transition-all flex items-center gap-3">
+                <i class="fa-solid fa-comments w-5 text-amber-400"></i> Kritik & Saran
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="pt-24 pb-16 flex-grow">
+
+        <!-- ================= SECTION 0: BERANDA ================= -->
+        <section id="section-home" class="view-section">
+            <div class="relative overflow-hidden py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-amber-500/10 blur-[130px] rounded-full pointer-events-none"></div>
+
+                <div class="relative z-10 text-center max-w-3xl mx-auto">
+                    <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-800/80 border border-slate-700/80 text-amber-400 text-xs font-semibold tracking-wide uppercase mb-6">
+                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                        Multimedia Jurnalistik · SMK Negeri 1 Singosari
+                    </div>
+
+                    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight">
+                        MMJ <span class="bg-gradient-to-r from-amber-400 via-amber-200 to-yellow-500 bg-clip-text text-transparent">Digital Space</span>
+                    </h1>
+
+                    <p class="text-xl sm:text-2xl font-bold text-slate-200 tracking-wider uppercase my-3 text-amber-400/90 font-mono">
+                        "CAPTURE THE MOMENT, PRESERVE THE STORY."
+                    </p>
+
+                    <p class="text-lg text-slate-300 font-normal max-w-xl mx-auto mb-8">
+                        Setiap momen punya cerita. Selamat datang di portal resmi dokumentasi, berita, dan pameran fotografi & videografi MMJ Stema.
+                    </p>
+
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button onclick="navigateTo('archive')" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold shadow-lg shadow-amber-500/20 transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-images"></i> Memory Archive
+                        </button>
+                        <button onclick="navigateTo('news')" class="px-6 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700 transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-newspaper"></i> Baca Newsroom
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shortcuts Grid -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+                <div class="text-center mb-10">
+                    <h2 class="text-2xl font-bold text-white">Fitur Utama Portal</h2>
+                    <p class="text-slate-400 text-sm mt-1">Akses cepat menuju kanal informasi dan karya MMJ Stema</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div onclick="navigateTo('archive')" class="bg-cardBg border border-cardBorder rounded-2xl p-6 card-hover cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-box-archive"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">Memory Archive</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">Arsip dokumentasi foto dan video acara serta kegiatan resmi SMK Negeri 1 Singosari.</p>
+                        <span class="inline-flex items-center text-xs font-semibold text-amber-400">Buka Galeri Arsip <i class="fa-solid fa-arrow-right ml-2 text-[10px]"></i></span>
+                    </div>
+
+                    <div onclick="navigateTo('news')" class="bg-cardBg border border-cardBorder rounded-2xl p-6 card-hover cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-newspaper"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-sky-400 transition-colors">Newsroom</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">Publikasi berita terkini, artikel jurnalistik, liputan khusus, dan prestasi dari MMJ Stema.</p>
+                        <span class="inline-flex items-center text-xs font-semibold text-sky-400">Baca Berita <i class="fa-solid fa-arrow-right ml-2 text-[10px]"></i></span>
+                    </div>
+
+                    <div onclick="navigateTo('profile')" class="bg-cardBg border border-cardBorder rounded-2xl p-6 card-hover cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">Jejak & Profil MMJ</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">Mengenal lebih dalam ekskul Multimedia Jurnalistik, 3 divisi utama, serta Divisi Humas Stema.</p>
+                        <span class="inline-flex items-center text-xs font-semibold text-emerald-400">Lihat Profil & Divisi <i class="fa-solid fa-arrow-right ml-2 text-[10px]"></i></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 1: MEMORY ARCHIVE ================= -->
+        <section id="section-archive" class="view-section hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 pb-6 border-b border-slate-800">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Dokumentasi Acara</span>
+                        <h2 class="text-3xl font-extrabold text-white mt-1">Memory Archive</h2>
+                        <p class="text-slate-400 text-sm mt-1">Arsip dokumentasi kegiatan di SMK Negeri 1 Singosari.</p>
+                    </div>
+
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
+                        <input type="text" id="archive-search" oninput="filterArchive()" placeholder="Cari nama kegiatan..." class="pl-10 pr-4 py-2.5 bg-cardBg border border-cardBorder rounded-xl text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-500 w-full sm:w-64">
+                    </div>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-6 no-scrollbar">
+                    <button onclick="setArchiveCategory('all')" class="archive-cat-btn active border px-4 py-1.5 rounded-full text-xs font-medium bg-amber-500 text-slate-950 font-bold border-amber-500 whitespace-nowrap">Semua Kegiatan</button>
+                    <button onclick="setArchiveCategory('Event Sekolah')" class="archive-cat-btn border px-4 py-1.5 rounded-full text-xs font-medium bg-cardBg text-slate-300 border-cardBorder hover:border-slate-700 whitespace-nowrap">Event Sekolah</button>
+                    <button onclick="setArchiveCategory('Liputan Khusus')" class="archive-cat-btn border px-4 py-1.5 rounded-full text-xs font-medium bg-cardBg text-slate-300 border-cardBorder hover:border-slate-700 whitespace-nowrap">Liputan Khusus</button>
+                    <button onclick="setArchiveCategory('Ekstrakurikuler')" class="archive-cat-btn border px-4 py-1.5 rounded-full text-xs font-medium bg-cardBg text-slate-300 border-cardBorder hover:border-slate-700 whitespace-nowrap">Ekstrakurikuler</button>
+                </div>
+
+                <!-- Archive Grid -->
+                <div id="archive-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 2: NEWSROOM ================= -->
+        <section id="section-news" class="view-section hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 pb-6 border-b border-slate-800">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-sky-400">Portal Publikasi</span>
+                        <h2 class="text-3xl font-extrabold text-white mt-1">MMJ Newsroom</h2>
+                        <p class="text-slate-400 text-sm mt-1">Kabar berita, artikel edukatif, dan hasil liputan jurnalistik sekolah Stema.</p>
+                    </div>
+
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
+                        <input type="text" id="news-search" oninput="filterNews()" placeholder="Cari judul berita..." class="pl-10 pr-4 py-2.5 bg-cardBg border border-cardBorder rounded-xl text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-500 w-full sm:w-64">
+                    </div>
+                </div>
+
+                <!-- News Grid -->
+                <div id="news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 3: JEJAK & PROFIL MMJ ================= -->
+        <section id="section-profile" class="view-section hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Banner Intro MMJ Stema -->
+                <div class="bg-gradient-to-r from-amber-950/40 via-cardBg to-cardBg border border-amber-500/30 rounded-3xl p-6 lg:p-10 mb-10 relative overflow-hidden">
+                    <div class="max-w-3xl">
+                        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase tracking-wider">Mengenal MMJ Stema</span>
+                        <h2 class="text-3xl lg:text-4xl font-extrabold text-white mt-3 mb-4">Multimedia Jurnalistik SMKN 1 Singosari</h2>
+                        <p class="text-slate-300 text-base leading-relaxed">
+                            <strong>Multimedia Jurnalistik Stema (MMJ)</strong> adalah ekstrakurikuler wadah kreativitas siswa SMK Negeri 1 Singosari dalam mengolah informasi, mengabadikan visual, dan menghasilkan karya media modern. Kami berfokus pada pengembangan kemampuan teknis dan etika jurnalistik digital.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 3 DIVISI UTAMA MMJ -->
+                <div class="mb-12">
+                    <div class="text-center max-w-2xl mx-auto mb-8">
+                        <h3 class="text-2xl font-bold text-white">Tiga Divisi Utama MMJ</h3>
+                        <p class="text-slate-400 text-sm mt-1">Pilar utama operasional dan produksi karya di MMJ Stema</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Divisi 1: Kamera -->
+                        <div class="bg-cardBg border border-cardBorder rounded-2xl p-6 card-hover">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4">
+                                <i class="fa-solid fa-camera"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2">1. Divisi Kamera</h4>
+                            <p class="text-xs text-amber-400 font-semibold mb-3">Fotografi & Videografi Lapangan</p>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Bertanggung jawab di garis depan dalam mengambil dokumentasi foto dan video acara sekolah, momen penting, serta produksi karya visual kreatif dengan standar teknik pengambilan gambar profesional.
+                            </p>
+                        </div>
+
+                        <!-- Divisi 2: Editing -->
+                        <div class="bg-cardBg border border-cardBorder rounded-2xl p-6 card-hover">
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl mb-4">
+                                <i class="fa-solid fa-film"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2">2. Divisi Editing</h4>
+                            <p class="text-xs text-purple-400 font-semibold mb-3">Post-Production & Audio Visual</p>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Mengolah seluruh footage mentah menjadi karya video sinematik, penyuntingan foto, pewarnaan (color grading), pengolahan suara, dan pembuatan elemen grafis bergerak.
+                            </p>
+                        </div>
+
+                        <!-- Divisi 3: Jurnalistik -->
+                        <div class="bg-cardBg border border-cardBorder rounded-2xl p-6 card-hover">
+                            <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl mb-4">
+                                <i class="fa-solid fa-pen-nib"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2">3. Divisi Jurnalistik</h4>
+                            <p class="text-xs text-sky-400 font-semibold mb-3">Penulisan Naskah & Redaksi Berita</p>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Menangani wawancara narasumber, riset materi, penyusunan artikel berita, caption media sosial, serta penulisan skrip narasi video liputan secara objektif dan informatif.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUB-BAGIAN: DIVISI HUMAS (Hubungan Masyarakat) -->
+                <div class="bg-cardBg border border-cardBorder rounded-3xl p-6 lg:p-8">
+                    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 pb-6 border-b border-slate-800 mb-6">
+                        <div>
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider">Pendukung Organisasi</span>
+                            <h3 class="text-2xl font-bold text-white mt-2">Divisi Hubungan Masyarakat (Humas)</h3>
+                            <p class="text-slate-400 text-sm mt-1">Jembatan komunikasi resmi antara MMJ Stema, sekolah, dan publik eksternal.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-3">
+                            <h4 class="text-base font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-bullhorn text-emerald-400"></i> Peran & Fungsi Utama Humas
+                            </h4>
+                            <ul class="space-y-2 text-sm text-slate-300">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-400 text-xs mt-1"></i>
+                                    <span>Mengelola seluruh kanal publikasi media sosial resmi MMJ Stema.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-400 text-xs mt-1"></i>
+                                    <span>Menjalin kemitraan media partner dengan ekstrakurikuler lain dan OSIS SMKN 1 Singosari.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-400 text-xs mt-1"></i>
+                                    <span>Mengakomodasi permohonan liputan acara dan konferensi pers sekolah.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-900/60 rounded-2xl p-5 border border-slate-800">
+                            <h4 class="text-sm font-bold text-white mb-3">Kontak Resmi Divisi Humas</h4>
+                            <div class="space-y-2.5 text-xs">
+                                <div class="flex items-center gap-3 text-slate-300">
+                                    <i class="fa-brands fa-instagram text-pink-400 text-base w-5"></i>
+                                    <span>Instagram: <strong>@mmj_stema</strong></span>
+                                </div>
+                                <div class="flex items-center gap-3 text-slate-300">
+                                    <i class="fa-solid fa-envelope text-amber-400 text-base w-5"></i>
+                                    <span>Email: <strong>mmj@smkn1singosari.sch.id</strong></span>
+                                </div>
+                                <div class="flex items-center gap-3 text-slate-300">
+                                    <i class="fa-brands fa-whatsapp text-emerald-400 text-base w-5"></i>
+                                    <span>WhatsApp Humas: <strong>+62 812-3456-7890</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 4: KARYA VISUAL (FOTOGRAFI & VIDEOGRAFI) ================= -->
+        <section id="section-visual" class="view-section hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 pb-6 border-b border-slate-800">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Showcase Karya Visual</span>
+                        <h2 class="text-3xl font-extrabold text-white mt-1">Galeri Fotografi & Videografi</h2>
+                        <p class="text-slate-400 text-sm mt-1">Pameran hasil karya tangkapan kamera dan kreasi video anggota MMJ Stema.</p>
+                    </div>
+                </div>
+
+                <!-- Visual Category Filters -->
+                <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-6 no-scrollbar">
+                    <button onclick="setVisualCategory('all')" class="visual-cat-btn active border px-4 py-1.5 rounded-full text-xs font-medium bg-amber-500 text-slate-950 font-bold border-amber-500 whitespace-nowrap">Semua Karya</button>
+                    <button onclick="setVisualCategory('Fotografi')" class="visual-cat-btn border px-4 py-1.5 rounded-full text-xs font-medium bg-cardBg text-slate-300 border-cardBorder hover:border-slate-700 whitespace-nowrap">Fotografi</button>
+                    <button onclick="setVisualCategory('Videografi')" class="visual-cat-btn border px-4 py-1.5 rounded-full text-xs font-medium bg-cardBg text-slate-300 border-cardBorder hover:border-slate-700 whitespace-nowrap">Videografi</button>
+                    <button onclick="setVisualCategory('Cinematography')" class="visual-cat-btn border px-4 py-1.5 rounded-full text-xs font-medium bg-cardBg text-slate-300 border-cardBorder hover:border-slate-700 whitespace-nowrap">Cinematography</button>
+                    <button onclick="setVisualCategory('Street Photography')" class="visual-cat-btn border px-4 py-1.5 rounded-full text-xs font-medium bg-cardBg text-slate-300 border-cardBorder hover:border-slate-700 whitespace-nowrap">Street Photography</button>
+                    <button onclick="setVisualCategory('Event Highlight')" class="visual-cat-btn border px-4 py-1.5 rounded-full text-xs font-medium bg-cardBg text-slate-300 border-cardBorder hover:border-slate-700 whitespace-nowrap">Event Highlight</button>
+                </div>
+
+                <!-- Visual Gallery Grid -->
+                <div id="visual-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 5: KRITIK & SARAN ================= -->
+        <section id="section-feedback" class="view-section hidden">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Aspirasi & Evaluasi</span>
+                    <h2 class="text-3xl font-extrabold text-white mt-1">Kritik & Saran</h2>
+                    <p class="text-slate-400 text-sm mt-2 max-w-xl mx-auto">
+                        Bantu MMJ Stema menjadi lebih baik. Seluruh kritik, saran, dan masukan disampaikan secara resmi melalui Google Form.
+                    </p>
+                </div>
+
+                <div class="bg-cardBg border border-cardBorder rounded-3xl p-6 sm:p-10 text-center shadow-xl relative overflow-hidden">
+                    <div class="w-16 h-16 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-3xl mx-auto mb-6">
+                        <i class="fa-solid fa-clipboard-question"></i>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white mb-3">Formulir Evaluasi Resmi MMJ Stema</h3>
+                    <p class="text-slate-300 text-sm max-w-md mx-auto mb-8 leading-relaxed">
+                        Klik tombol di bawah ini untuk membuka Google Form resmi kami. Tanggapan Anda sangat berharga bagi perkembangan organisasi Multimedia Jurnalistik SMK Negeri 1 Singosari.
+                    </p>
+
+                    <!-- EDIT YOUR GOOGLE FORM LINK HERE BELOW -->
+                    <a id="gform-cta-btn" href="https://forms.google.com" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-extrabold text-sm shadow-xl shadow-amber-500/20 transition-all transform hover:-translate-y-1">
+                        <i class="fa-brands fa-google text-lg"></i> Isikan Formulir Google Form <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i>
+                    </a>
+
+                    <p class="text-[11px] text-slate-500 mt-6">*Tautan aman dan terhubung langsung ke Google Forms resmi MMJ Stema.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800/80 bg-[#05080e] py-8 text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-7 h-7 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-camera-retro"></i>
+                </div>
+                <span>© 2026 <strong>MMJ Digital Space</strong> · SMKN 1 Singosari (Stema)</span>
+            </div>
+            <p class="text-center sm:text-right">Capture the moment, preserve the story.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL LIGHTBOX (For Memory Archive & Visual Showcase) -->
+    <div id="media-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="relative max-w-4xl w-full bg-cardBg border border-cardBorder rounded-3xl overflow-hidden shadow-2xl my-8 max-h-[90vh] flex flex-col">
+            <button onclick="closeMediaModal()" class="absolute top-4 right-4 z-10 p-2.5 rounded-full bg-slate-900/80 text-slate-300 hover:text-white border border-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="overflow-y-auto p-6">
+                <img id="modal-img" src="" alt="Preview" class="w-full max-h-[60vh] object-contain rounded-2xl bg-black mb-4">
+                <div class="flex items-center gap-2 mb-2">
+                    <span id="modal-tag" class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase">Kategori</span>
+                    <span id="modal-date" class="text-xs text-slate-400">Info / Tanggal</span>
+                </div>
+                <h3 id="modal-title" class="text-xl font-bold text-white mb-2">Judul Karya</h3>
+                <p id="modal-desc" class="text-slate-300 text-sm leading-relaxed">Deskripsi lengkap karya...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL NEWS READER -->
+    <div id="news-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="relative max-w-3xl w-full bg-cardBg border border-cardBorder rounded-3xl overflow-hidden shadow-2xl my-8 max-h-[90vh] flex flex-col">
+            <button onclick="closeNewsModal()" class="absolute top-4 right-4 z-10 p-2.5 rounded-full bg-slate-900/80 text-slate-300 hover:text-white border border-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="overflow-y-auto p-6 sm:p-8">
+                <span id="news-modal-category" class="px-3 py-1 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/20 uppercase tracking-wider mb-4 inline-block">Kategori</span>
+                <h2 id="news-modal-title" class="text-2xl sm:text-3xl font-extrabold text-white mb-4 leading-tight">Judul Berita</h2>
+                
+                <div class="flex items-center gap-4 text-xs text-slate-400 pb-6 border-b border-slate-800 mb-6">
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-user text-sky-400"></i> <span id="news-modal-author">Penulis</span></span>
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-calendar text-sky-400"></i> <span id="news-modal-date">Tanggal</span></span>
+                </div>
+
+                <img id="news-modal-img" src="" alt="News Image" class="w-full h-64 sm:h-80 object-cover rounded-2xl mb-6">
+
+                <div id="news-modal-content" class="text-slate-300 text-sm sm:text-base leading-relaxed space-y-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- External Script File -->
+    <script src="script.js"></script>
+</body>
+</html>
